@@ -4,7 +4,7 @@ require 'json'
 module Gosen
   class Node
     include Model
-    attr_accessor :type, :uid, :uri
+    attr_accessor :architecture, :main_memory, :network_adapters, :operating_system, :processor, :storage_devices, :supported_job_types, :type, :uid, :uri
 
     def initialize(hash)
       @hash = hash
