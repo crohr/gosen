@@ -1,0 +1,25 @@
+#!/usr/bin/env ruby
+
+$:.unshift File.join(File.dirname(__FILE__), "..", "lib")
+
+require 'gosen'
+
+session = Gosen::Session.new('https://localhost:3443/1.0-stable')
+grid = Gosen::Grid.new
+
+# Example: list all clusters in the grid
+grid.sites.each do |site|
+  puts "#{site.name}: #{site.clusters.map{|c| c.uid}.join(', ')}"
+end
+
+# Example: select a specific site
+# TODO: the monitoring API should be supported, so that you can do: grid.sites.detect { |s| s.stats.free >= 100 }
+rennes = grid.sites.detect{ |s| s.name == "Rennes" }
+puts rennes.name
+
+# TODO: the jobset API should be supported, so that you can submit a 1-hour deploy job with 2 nodes on each cluster like this:
+# grid.sites.each do |site|
+#   site.clusters.each do |cluster|
+#     Gosen::Job.new(:cluster => cluster, nodes => 2, walltime => 3600, :type => :deploy)
+#   end
+# end

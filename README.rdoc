@@ -1,7 +1,9 @@
-= gosen
+= Gosen
 
-Description goes here.
+Gosen is a Ruby wrapper to access the Grid'5000 RESTful API.
 
 == Copyright
 
 Copyright (c) 2009 Pierre Riteau. See LICENSE for details.
+
+Portions Copyright (c) 2007 Chad Fowler <chad@infoether.com>. See LICENSE for details.
