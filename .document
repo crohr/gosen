@@ -1,5 +1,7 @@
 README.rdoc
-lib/**/*.rb
+lib/gosen/models/*.rb
+lib/gosen/session.rb
+lib/*.rb
 bin/*
 features/**/*.feature
 LICENSE
