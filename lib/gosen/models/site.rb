@@ -9,6 +9,7 @@ module Gosen
     def initialize(hash)
       @hash = hash
       populate_from_hash!(@hash)
+      @clusters = nil
     end
 
     def clusters

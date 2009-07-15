@@ -11,6 +11,7 @@ module Gosen
     def initialize
       @hash = JSON.parse(Gosen::Session.session['/versions/current'].get(:accept => 'application/json'))
       populate_from_hash!(@hash)
+      @sites = nil
     end
 
     def sites
