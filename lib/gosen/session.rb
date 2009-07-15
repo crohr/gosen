@@ -5,7 +5,7 @@ module Gosen
     def initialize(url)
       @@session = RestClient::Resource.new(url)
     end
-    
+
     def Session.session
       @@session
     end
