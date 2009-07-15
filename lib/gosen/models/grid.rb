@@ -16,9 +16,9 @@ module Gosen
     def sites
       return @sites unless @sites.nil?
       @sites = []
-      @hash['sites'].each do |site, uri|
-        sitehash = JSON.parse(Gosen::Session.session[uri].get(:accept => 'application/json'))
-        @sites.push(Gosen::Site.new(sitehash))
+      h = JSON.parse(Gosen::Session.session[@uri + "?depth=2"].get(:accept => 'application/json'))['sites']
+      h.each do |name, data|
+        @sites.push(Gosen::Site.new(data))
       end
       return @sites.sort! { |a,b| a.name <=> b.name }
     end

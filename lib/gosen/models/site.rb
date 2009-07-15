@@ -14,9 +14,9 @@ module Gosen
     def clusters
       return @clusters unless @clusters.nil?
       @clusters = []
-      @hash['clusters'].each do |cluster, uri|
-        clusterhash = JSON.parse(Gosen::Session.session[uri].get(:accept => 'application/json'))
-        @clusters.push(Gosen::Cluster.new(clusterhash))
+      h = JSON.parse(Gosen::Session.session[@uri + "?depth=2"].get(:accept => 'application/json'))['clusters']
+      h.each do |name, data|
+        @clusters.push(Gosen::Cluster.new(data))
       end
       return @clusters.sort! { |a,b| a.uid <=> b.uid }
     end

@@ -14,9 +14,9 @@ module Gosen
     def nodes
       return @nodes unless @nodes.nil?
       @nodes = []
-      @hash['nodes'].each do |node, uri|
-        nodehash = JSON.parse(Gosen::Session.session[uri].get(:accept => 'application/json'))
-        @nodes.push(Gosen::Node.new(nodehash))
+      h = JSON.parse(Gosen::Session.session[@uri + "?depth=2"].get(:accept => 'application/json'))['nodes']
+      h.each do |name, data|
+        @nodes.push(Gosen::Node.new(data))
       end
       return @nodes.sort! { |a,b| a.uid <=> b.uid }
     end
