@@ -1,4 +1,6 @@
 require 'gosen/model'
+require 'gosen/models/cluster'
 require 'gosen/models/grid'
+require 'gosen/models/node'
 require 'gosen/models/site'
 require 'gosen/session'
