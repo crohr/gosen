@@ -36,6 +36,8 @@ puts me.jobsets.map{ |js| js.name }.join(', ')
 # List the job IDs of my first jobset
 jobs = me.jobsets.detect{ |js| js.name == "My First Jobset" }.jobs
 puts jobs.map{ |j| j.uid }.join(', ') unless jobs.empty?
+# Create a new jobset
+puts me.create_jobset(:name => "My Second Jobset", :project => "Something cool").uid
 
 # TODO: submitting to the jobset API should be supported, so that you can submit a 1-hour deploy job with 2 nodes on each cluster like this:
 # grid.sites.each do |site|

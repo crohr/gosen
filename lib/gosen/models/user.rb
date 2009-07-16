@@ -21,5 +21,10 @@ module Gosen
       end
       return @jobsets
     end
+    
+    def create_jobset(params)
+      json = Gosen::Session.jobset[self.uri]['jobsets'].post(params.to_json, :accept => 'application/json', :content_type => 'application/json')
+      return Gosen::Jobset.new(JSON.parse(json))
+    end
   end
 end
