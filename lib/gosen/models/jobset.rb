@@ -4,10 +4,11 @@ require 'json'
 module Gosen
   class Jobset
     include Model
-    attr_accessor :user, :name, :uri, :updated_at, :misc, :project, :public_uri, :jobs_uri, :id, :created_at
+    attr_accessor :user, :name, :uri, :updated_at, :misc, :project, :public_uri, :jobs_uri, :uid, :created_at
 
     def initialize(hash)
       populate_from_hash!(hash)
+      @uid = hash['id']
     end
 
     def jobs

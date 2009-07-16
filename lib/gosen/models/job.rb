@@ -4,7 +4,7 @@ require 'json'
 module Gosen
   class Job
     include Model
-    attr_accessor :resources_uri, :created_at, :uri, :command, :ssh_public_key_uri, :ssh_private_key_uri, :cluster_jobs, :id, :ssh_key_path, :state, :cluster_jobs
+    attr_accessor :resources_uri, :created_at, :uri, :command, :ssh_public_key_uri, :ssh_private_key_uri, :cluster_jobs, :uid, :ssh_key_path, :state, :cluster_jobs
 
     def initialize(hash)
       @hash = hash
@@ -13,11 +13,12 @@ module Gosen
       @hash['cluster_jobs'].each do |cj|
         @cluster_jobs.push(Gosen::Job::Cluster.new(cj))
       end
+      @uid = hash['id']
     end
 
     class Cluster
       include Model
-      attr_accessor :dependencies, :name, :assigned_resources, :scheduledStart, :uri, :command, :walltime, :reservation, :project, :submissionTime, :wanted_resources, :jobType, :events, :id, :cluster, :types, :resubmit_job_id, :startTime, :launchingDirectory, :queue, :assigned_network_address, :cpuset_name, :message, :state, :owner, :properties
+      attr_accessor :dependencies, :name, :assigned_resources, :scheduledStart, :uri, :command, :walltime, :reservation, :project, :submissionTime, :wanted_resources, :jobType, :events, :uid, :cluster, :types, :resubmit_job_id, :startTime, :launchingDirectory, :queue, :assigned_network_address, :cpuset_name, :message, :state, :owner, :properties
 
       def initialize(hash)
         fullhash = JSON.parse(Gosen::Session.jobset[hash['uri']].get(:accept => 'application/json'))
@@ -26,6 +27,7 @@ module Gosen
         fullhash['events'].each do |e|
           @events.push(Gosen::Job::Cluster::Event.new(e))
         end
+        @uid = hash['id']
       end
 
       class Event
