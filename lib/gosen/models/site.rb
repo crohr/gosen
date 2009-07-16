@@ -24,12 +24,12 @@ module Gosen
 
     class Status
       include Model
-      attr_accessor :hardware, :system
+      attr_accessor :hardware, :system, :uri, :generated_at
 
       def initialize(hash)
         populate_from_hash!(hash)
-        @hardware = Gosen::Site::Status::Hardware.new(hash['hardware_state'])
-        @system = Gosen::Site::Status::System.new(hash['system_state'])
+        @hardware = Gosen::Site::Status::Hardware.new(hash['aggregated_nodes_stats']['hardware_state'])
+        @system = Gosen::Site::Status::System.new(hash['aggregated_nodes_stats']['system_state'])
       end
 
       class System
@@ -54,8 +54,9 @@ module Gosen
     end
 
     def status
-      h = JSON.parse(Gosen::Session.monitoring["/sites/#{@name.downcase}/statuses/current"].get(:accept => 'application/json'))
-      return Gosen::Site::Status.new(h['aggregated_nodes_stats'])
+      base_uri = @uri.sub(/\/versions\/[a-f0-9]+/, '')
+      h = JSON.parse(Gosen::Session.monitoring["#{base_uri}/statuses/current"].get(:accept => 'application/json'))
+      return Gosen::Site::Status.new(h)
     end
   end
 end
