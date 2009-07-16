@@ -29,7 +29,14 @@ puts idle_cluster.uid if idle_cluster
 puts paradent_13.status.hardware
 puts paradent_13.status.system
 
-# TODO: the jobset API should be supported, so that you can submit a 1-hour deploy job with 2 nodes on each cluster like this:
+# Example: using the jobset API
+me = Gosen::User.new('priteau')
+# List all my jobsets
+puts me.jobsets.map{ |js| js.name }.join(', ')
+# List the job IDs of my first jobset
+puts me.jobsets.detect{ |js| js.name == "My First Jobset" }.jobs.map{ |j| j.id }.join(', ')
+
+# TODO: submitting to the jobset API should be supported, so that you can submit a 1-hour deploy job with 2 nodes on each cluster like this:
 # grid.sites.each do |site|
 #   site.clusters.each do |cluster|
 #     Gosen::Job.new(:cluster => cluster, nodes => 2, walltime => 3600, :type => :deploy)
