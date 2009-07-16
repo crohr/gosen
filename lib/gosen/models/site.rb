@@ -37,7 +37,7 @@ module Gosen
         attr_accessor :busy, :besteffort, :free, :unknown
 
         def initialize(hash)
-          busy = besteffort = free = unknown = 0
+          @busy = @besteffort = @free = @unknown = 0
           populate_from_hash!(hash)
         end
       end
@@ -47,7 +47,7 @@ module Gosen
         attr_accessor :alive, :dead, :absent
 
         def initialize(hash)
-          alive = dead = absent = 0
+          @alive = @dead = @absent = 0
           populate_from_hash!(hash)
         end
       end
