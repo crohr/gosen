@@ -44,10 +44,10 @@ module Gosen
 
       class Hardware
         include Model
-        attr_accessor :alive, :dead, :absent
+        attr_accessor :alive, :dead, :absent, :suspected
 
         def initialize(hash)
-          @alive = @dead = @absent = 0
+          @alive = @dead = @absent = @suspected = 0
           populate_from_hash!(hash)
         end
       end
