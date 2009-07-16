@@ -59,5 +59,25 @@ module Gosen
       attr_accessor :virtual, :besteffort, :deploy
     end
 
+    class Status
+      include Model
+      attr_accessor :system, :uri, :hardware, :reservations
+
+      def initialize(hash)
+        populate_from_hash!(hash)
+        @hardware = hash['hardware_state']
+        @system = hash['system_state']
+        @reservations = []
+        hash['reservations'].each do |r|
+          @reservations.push(Gosen::Reservation.new(r))
+        end
+      end
+    end
+
+    def status
+      base_uri = @uri.sub(/\/versions\/[a-f0-9]+/, '')
+      h = JSON.parse(Gosen::Session.monitoring["#{base_uri}/statuses/current"].get(:accept => 'application/json'))
+      return Gosen::Node::Status.new(h)
+    end
   end
 end

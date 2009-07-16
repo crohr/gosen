@@ -26,6 +26,9 @@ puts grid.sites.detect { |s| s.status.system.free >= 100 }.name
 idle_cluster = grid.sites.detect { |s| s.name == "Rennes" }.clusters.detect { |c| c.status.system.busy == 0 }
 puts idle_cluster.uid if idle_cluster
 
+puts paradent_13.status.hardware
+puts paradent_13.status.system
+
 # TODO: the jobset API should be supported, so that you can submit a 1-hour deploy job with 2 nodes on each cluster like this:
 # grid.sites.each do |site|
 #   site.clusters.each do |cluster|
