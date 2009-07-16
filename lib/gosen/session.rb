@@ -7,8 +7,8 @@ module Gosen
     MONITORING_VERSION = "1.0-stable"
     JOBSET_VERSION = "sid"
 
-    def initialize(url)
-      @@session = RestClient::Resource.new(url)
+    def initialize(url, params)
+      @@session = RestClient::Resource.new(url, params)
     end
 
     def Session.reference
