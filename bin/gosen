@@ -12,14 +12,16 @@ grid.sites.each do |site|
   puts "#{site.name}: #{site.clusters.map{|c| c.uid}.join(', ')}"
 end
 
-# Example: select specific resources
-# TODO: the monitoring API should be supported, so that you can do: grid.sites.detect { |s| s.stats.free >= 100 }
+# Example: select specific resources with the Reference API
 rennes = grid.sites.detect{ |s| s.name == "Rennes" }
 puts rennes.name
 paradent = rennes.clusters.detect{ |c| c.uid == "paradent" }
 puts paradent.uid
 paradent_13 = paradent.nodes.detect{ |n| n.uid == "paradent-13" }
 puts paradent_13.uid
+
+# Example: select specific resources with the Monitoring API
+puts grid.sites.detect { |s| s.status.system.free >= 100 }.name
 
 # TODO: the jobset API should be supported, so that you can submit a 1-hour deploy job with 2 nodes on each cluster like this:
 # grid.sites.each do |site|
