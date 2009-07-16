@@ -35,11 +35,21 @@ module Gosen
       class System
         include Model
         attr_accessor :busy, :besteffort, :free, :unknown
+
+        def initialize(hash)
+          busy = besteffort = free = unknown = 0
+          populate_from_hash!(hash)
+        end
       end
 
       class Hardware
         include Model
         attr_accessor :alive, :dead, :absent
+
+        def initialize(hash)
+          alive = dead = absent = 0
+          populate_from_hash!(hash)
+        end
       end
     end
 
