@@ -28,8 +28,8 @@ module Gosen
 
       def initialize(hash)
         populate_from_hash!(hash)
-        @hardware = Gosen::Site::Status::Hardware.new(hash['aggregated_nodes_stats']['hardware_state'])
-        @system = Gosen::Site::Status::System.new(hash['aggregated_nodes_stats']['system_state'])
+        @hardware = Gosen::Cluster::Status::Hardware.new(hash['aggregated_nodes_stats']['hardware_state'])
+        @system = Gosen::Cluster::Status::System.new(hash['aggregated_nodes_stats']['system_state'])
       end
 
       class System
