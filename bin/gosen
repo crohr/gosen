@@ -4,7 +4,7 @@ $:.unshift File.join(File.dirname(__FILE__), "..", "lib")
 
 require 'gosen'
 
-session = Gosen::Session.new('https://localhost:3443/1.0-stable')
+session = Gosen::Session.new('https://localhost:3443')
 grid = Gosen::Grid.new
 
 # Example: list all clusters in the grid

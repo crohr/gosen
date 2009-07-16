@@ -15,7 +15,7 @@ module Gosen
     def nodes
       return @nodes unless @nodes.nil?
       @nodes = []
-      h = JSON.parse(Gosen::Session.session[@uri + "?depth=2"].get(:accept => 'application/json'))['nodes']
+      h = JSON.parse(Gosen::Session.reference[@uri + "?depth=2"].get(:accept => 'application/json'))['nodes']
       h.each do |name, data|
         @nodes.push(Gosen::Node.new(data))
       end

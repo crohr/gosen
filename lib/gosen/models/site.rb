@@ -15,7 +15,7 @@ module Gosen
     def clusters
       return @clusters unless @clusters.nil?
       @clusters = []
-      h = JSON.parse(Gosen::Session.session[@uri + "?depth=2"].get(:accept => 'application/json'))['clusters']
+      h = JSON.parse(Gosen::Session.reference[@uri + "?depth=2"].get(:accept => 'application/json'))['clusters']
       h.each do |name, data|
         @clusters.push(Gosen::Cluster.new(data))
       end
@@ -44,7 +44,7 @@ module Gosen
     end
 
     def status
-      h = JSON.parse(Gosen::Session.session["/sites/#{@name.downcase}/statuses/current"].get(:accept => 'application/json'))
+      h = JSON.parse(Gosen::Session.monitoring["/sites/#{@name.downcase}/statuses/current"].get(:accept => 'application/json'))
       return Gosen::Site::Status.new(h['aggregated_nodes_stats'])
     end
   end
